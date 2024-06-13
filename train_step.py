@@ -11,7 +11,7 @@ import CNN as cn
 
 
 class Model_Train:
-    def __init__(self, test_x, test_y, train_loader) -> None:
+    def __init__(self, test_x, test_y, train_loader, model_name, epoch=10) -> None:
         
         cnn = cn.CNN()
         print(cnn)
@@ -21,7 +21,8 @@ class Model_Train:
         loss_func = nn.CrossEntropyLoss()  # 目标标签是one-hotted
         
         # 开始训练
-        for epoch in range(us.EPOCH):
+        print("=======开始训练模型{}, 样本数{}, 训练次数{} =======".format(model_name,  len(test_x), epoch))
+        for epoch in range(epoch):
             for step, (b_x, b_y) in enumerate(train_loader):  # 分配batch data
                 output = cnn(b_x)  # 先将数据放到cnn中计算output
                 loss = loss_func(output, b_y)  # 输出和真实标签的loss，二者位置不可颠倒
@@ -35,5 +36,5 @@ class Model_Train:
                     accuracy = float((pred_y == test_y.data.numpy()).astype(int).sum()) / float(test_y.size(0))
                     print('Epoch: ', epoch, '| train loss: %.4f' % loss.data.numpy(), '| test accuracy: %.2f' % accuracy)
 
-        torch.save(cnn.state_dict(), 'cnn2.pkl')#保存模型
+        torch.save(cnn.state_dict(), model_name)#保存模型
 

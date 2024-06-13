@@ -12,7 +12,7 @@ import cv2
 import utils as us
 
 class DataSet(object):
-    def __init__(self, _path):
+    def __init__(self, _path, samples):
         self.train_data = torchvision.datasets.MNIST(
             root= _path, # 保存位置
             train=True, # 
@@ -27,7 +27,7 @@ class DataSet(object):
         )
 
         self.train_loader = self.dataLoader()
-        self.get_test()
+        self.get_test(samples)
     def dataLoader(self):
         return Data.DataLoader(
             dataset=self.train_data,
@@ -35,8 +35,11 @@ class DataSet(object):
             shuffle=True
         )
     
-    def get_test(self):
-        self.test_x = torch.unsqueeze(self.test_data.train_data, dim=1).type(torch.FloatTensor)[:2000]
-        self.test_y = test_y = self.test_data.test_labels[:2000]
+    def get_test(self, samples):
+        self.test_x = torch.unsqueeze(self.test_data.train_data, dim=1).type(torch.FloatTensor)[:samples]
+        self.test_y = test_y = self.test_data.test_labels[:samples]
+
+        self.new_x = torch.unsqueeze(self.test_data.train_data, dim=1).type(torch.FloatTensor)[-1000:-1]
+        self.new_y = self.test_data.test_labels[-1000:-1]
         return (self.test_x, self.test_y)
     # def 

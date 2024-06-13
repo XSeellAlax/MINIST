@@ -28,7 +28,10 @@ class Model_Test:
     def __init__(self, test_x, model_path)->None:
         self.inputs = test_x
         self.model = torch.load(model_path)
+        self.model_name = model_path
     def predict(self):
+
+        print("测试模型", self.model_name)
         cnn = cn.CNN()
         # cnn.load_state_dict(torch.load('cnn2.pkl'))
         cnn.load_state_dict(self.model)
@@ -53,7 +56,7 @@ class Model_Test:
         count = 0
 
         sum = float(len(test_y) + 0.0)
-        print(sum)
+        # print(sum)
 
         for i in range(len(test_y)):
             if(test_y[i] == pred_y[i]):
