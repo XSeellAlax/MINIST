@@ -43,3 +43,11 @@ class DataSet(object):
         self.new_y = self.test_data.test_labels[-1000:-1]
         return (self.test_x, self.test_y)
     # def 
+
+    def get_train_samples(self):
+
+        return self.test_x, self.test_y, self.dataLoader()
+    
+    def get_test_samples(self):
+
+        return self.new_x, self.new_y

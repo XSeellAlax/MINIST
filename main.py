@@ -5,34 +5,33 @@
 import model_test as mt
 import data_set as ds
 import train_step as ts
+import utils as us
 
 if __name__=="__main__":
 
-    # 读取数据集 用于训练两个模型
+    # 读取数据集 用于训练个模型
     data_set1 = ds.DataSet('./data', samples=2000)
     data_set2 = ds.DataSet("./data", samples=3000)
-    test_x1 = data_set1.test_x
+    
+    
+    test_x1, test_y1, train_loader1 = data_set1.get_train_samples()# 获取训练样本
 
-    test_y1 = data_set1.test_y
-    train_loader1 = data_set1.dataLoader()
-
-    test_x2 = data_set2.test_x
-    test_y2 = data_set2.test_y
-    train_loader2 = data_set2.dataLoader()
+    test_x2, test_y2, train_loader2 = data_set2.get_train_samples()
 
     # 训练模型
-    # train_model1 = ts.Model_Train(test_x=test_x1, test_y=test_y1, train_loader=train_loader1, model_name='cnn1.pkl')
-    # train_model2 = ts.Model_Train(test_x=test_x2, test_y=test_y2, train_loader=train_loader2, model_name='cnn2.pkl')
-    # train_model3 = ts.Model_Train(test_x=test_x2, test_y=test_y2, train_loader=train_loader2, model_name='cnn3.pkl', epoch=15)
+    # train_model1 = ts.Model_Train(test_x=test_x1, test_y=test_y1, train_loader=train_loader1, model_name='./model/cnn1.pkl')
+    # train_model2 = ts.Model_Train(test_x=test_x2, test_y=test_y2, train_loader=train_loader2, model_name='./model/cnn2.pkl')
+    # train_model3 = ts.Model_Train(test_x=test_x2, test_y=test_y2, train_loader=train_loader2, model_name='./model/cnn3.pkl', epoch=15)
     
     # 测试模型
 
-    new_x = data_set2.new_x
-    new_y = data_set2.new_y
+
+    new_x,new_y = data_set2.get_test_samples() # 获取测试样本
+
     numbers = eval(input("请输入测试数据数(<1000): "))
-    model_test1 = mt.Model_Test(test_x=new_x[-numbers:-1], model_path='cnn1.pkl')
-    model_test2 = mt.Model_Test(test_x=new_x[-numbers:-1], model_path='cnn2.pkl')
-    model_test3 = mt.Model_Test(test_x=new_x[-numbers:-1], model_path='cnn3.pkl')
+    model_test1 = mt.Model_Test(test_x=new_x[-numbers:-1], model_path='./model/cnn1.pkl')
+    model_test2 = mt.Model_Test(test_x=new_x[-numbers:-1], model_path='./model/cnn2.pkl')
+    model_test3 = mt.Model_Test(test_x=new_x[-numbers:-1], model_path='./model/cnn3.pkl')
 
     # 开始测试
     print("==========开始测试=================")

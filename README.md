@@ -28,5 +28,6 @@ classDiagram
 |model_test.py|模型测试|
 |train_step.py|模型训练|
 |main.py|主函数|
+|utils.py|模型参数|
 
 
