@@ -1,3 +1,7 @@
+# author: Wangpeng
+# date: 2024/06/13
+# function: main function
+
 import model_test as mt
 import data_set as ds
 import train_step as ts
@@ -17,7 +21,7 @@ if __name__=="__main__":
     train_loader2 = data_set2.dataLoader()
 
     # 训练模型
-    train_model1 = ts.Model_Train(test_x=test_x1, test_y=test_y1, train_loader=train_loader1, model_name='cnn1.pkl')
+    # train_model1 = ts.Model_Train(test_x=test_x1, test_y=test_y1, train_loader=train_loader1, model_name='cnn1.pkl')
     # train_model2 = ts.Model_Train(test_x=test_x2, test_y=test_y2, train_loader=train_loader2, model_name='cnn2.pkl')
     # train_model3 = ts.Model_Train(test_x=test_x2, test_y=test_y2, train_loader=train_loader2, model_name='cnn3.pkl', epoch=15)
     
